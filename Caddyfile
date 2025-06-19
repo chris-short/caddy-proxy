@@ -1,299 +1,373 @@
 {
 	# Global options
-	email {$CADDY_EMAIL:admin@example.com}
-	admin off
+	email chris@chrisshort.net # Add your email for Let's Encrypt notifications
+}
+
+##### URL Redirection #####
+
+blue.chrisshort.net {
+	tls {
+		issuer acme
+		protocols tls1.3
+	}
+	header {
+		X-Frame-Options "DENY"
+		X-Content-Type-Options "nosniff"
+		X-XSS-Protection "1; mode=block"
+		Referrer-Policy: no-referrer-when-downgrade
+		Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+		# Remove server header
+		-Server
+	}
+	redir * https://bsky.app/profile/chrisshort.net permanent
+}
+
+fathom.chrisshort.net {
+	tls {
+		issuer acme
+		protocols tls1.3
+	}
+	header {
+		X-Frame-Options "DENY"
+		X-Content-Type-Options "nosniff"
+		X-XSS-Protection "1; mode=block"
+		Referrer-Policy: no-referrer-when-downgrade
+		Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+		# Remove server header
+		-Server
+	}
+	redir * https://usefathom.com/ref/Z8NTXN permanent
+}
+
+meet.chrisshort.net {
+	tls {
+		issuer acme
+		protocols tls1.3
+	}
+	header {
+		X-Frame-Options "DENY"
+		X-Content-Type-Options "nosniff"
+		X-XSS-Protection "1; mode=block"
+		Referrer-Policy: no-referrer-when-downgrade
+		Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+		# Remove server header
+		-Server
+	}
+	redir * https://calendly.com/chrisshort permanent
+}
+
+purple.chrisshort.net {
+	tls {
+		issuer acme
+		protocols tls1.3
+	}
+	header {
+		X-Frame-Options "DENY"
+		X-Content-Type-Options "nosniff"
+		X-XSS-Protection "1; mode=block"
+		Referrer-Policy: no-referrer-when-downgrade
+		Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+		# Remove server header
+		-Server
+	}
+	redir * https://hachyderm.io/@ChrisShort permanent
+}
+
+resume.chrisshort.net {
+	tls {
+		issuer acme
+		protocols tls1.3
+	}
+	header {
+		X-Frame-Options "DENY"
+		X-Content-Type-Options "nosniff"
+		X-XSS-Protection "1; mode=block"
+		Referrer-Policy: no-referrer-when-downgrade
+		Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+		# Remove server header
+		-Server
+	}
+	redir * https://chrisshort.net/resume permanent
+}
+
+venturex.chrisshort.net {
+	tls {
+		issuer acme
+		protocols tls1.3
+	}
+	header {
+		X-Frame-Options "DENY"
+		X-Content-Type-Options "nosniff"
+		X-XSS-Protection "1; mode=block"
+		Referrer-Policy: no-referrer-when-downgrade
+		Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+		# Remove server header
+		-Server
+	}
+	redir * https://i.capitalone.com/JZPugzWtF permanent
+}
+
+amex.chrisshort.net {
+	tls {
+		issuer acme
+		protocols tls1.3
+	}
+	header {
+		X-Frame-Options "DENY"
+		X-Content-Type-Options "nosniff"
+		X-XSS-Protection "1; mode=block"
+		Referrer-Policy: no-referrer-when-downgrade
+		Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+		# Remove server header
+		-Server
+	}
+	redir * https://americanexpress.com/en-us/referral/delta-skymiles-gold-american-express-card?ref=CHRISSFkgN&xl=cp01 permanent
+}
+
+
+cbshort.dev www.cbshort.dev {
+	respond OK 200
+	encode gzip zstd
+	tls {
+		issuer acme
+		protocols tls1.3
+	}
+	header {
+		X-Frame-Options "DENY"
+		X-Content-Type-Options "nosniff"
+		X-XSS-Protection "1; mode=block"
+		Referrer-Policy: no-referrer-when-downgrade
+		Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+		# Remove server header
+		-Server
+	}
 	log {
-		output stdout
-		format console
+		output file /var/log/caddy/cbshort.dev-access.log
+	}
+	redir * https://chrisshort.net/micro/looking-for-a-new-role-2025/ permanent
+}
+
+coldrenshort.com www.coldrenshort.com {
+	respond OK 200
+	encode gzip zstd
+	tls {
+		issuer acme
+		protocols tls1.3
+	}
+	header {
+		X-Frame-Options "DENY"
+		X-Content-Type-Options "nosniff"
+		X-XSS-Protection "1; mode=block"
+		Referrer-Policy: no-referrer-when-downgrade
+		Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+		# Remove server header
+		-Server
+	}
+	log {
+		output file /var/log/caddy/coldrenshort.com-access.log
+	}
+	redir * https://chrisshort.net/the-story-of-julie-and-chris-engagement/ permanent
+}
+
+imagepullbackoff.dev {
+	redir https://{host}{uri}
+
+	tls {
+		issuer acme
+		protocols tls1.3
+	}
+
+	handle {
+		redir https://{host}{uri}
 	}
 }
 
-##### URL Redirection Section #####
-
-# Social Media Redirects
-blue.{$DOMAIN:example.com} {
-	@default {
-		not path /health
+detroitgolang.com www.detroitgolang.com {
+	respond OK 200
+	encode gzip zstd
+	tls {
+		issuer acme
+		protocols tls1.3
 	}
-	
-	# Health check endpoint
-	handle /health {
-		respond `{"status":"healthy","service":"blue-redirect","target":"{$BLUE_TARGET:https://bsky.app/profile/example.com}"}` 200 {
-			header Content-Type application/json
-		}
+	header {
+		X-Frame-Options "DENY"
+		X-Content-Type-Options "nosniff"
+		X-XSS-Protection "1; mode=block"
+		Referrer-Policy: no-referrer-when-downgrade
+		Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+		# Remove server header
+		-Server
 	}
-	
-	handle @default {
-		tls {
-			issuer acme
-			protocols tls1.3
-		}
-		header {
-			X-Frame-Options "DENY"
-			X-Content-Type-Options "nosniff"
-			X-XSS-Protection "1; mode=block"
-			Referrer-Policy: no-referrer-when-downgrade
-			Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
-			Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-			-Server
-		}
-		redir * {$BLUE_TARGET:https://bsky.app/profile/example.com} permanent
-	}
-	
 	log {
-		output file /var/log/caddy/blue-redirect.log
+		output file /var/log/caddy/detroitgolang.com-access.log
 	}
+	redir * https://github.com/detroitgolang permanent
 }
 
-# Analytics Redirect
-fathom.{$DOMAIN:example.com} {
-	@default {
-		not path /health
+suggestedread.com www.suggestedread.com {
+	tls {
+		issuer acme
+		protocols tls1.3
 	}
-	
-	handle /health {
-		respond `{"status":"healthy","service":"fathom-redirect"}` 200 {
-			header Content-Type application/json
-		}
+	header {
+		X-Frame-Options "DENY"
+		X-Content-Type-Options "nosniff"
+		X-XSS-Protection "1; mode=block"
+		Referrer-Policy: no-referrer-when-downgrade
+		Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+		# Remove server header
+		-Server
 	}
-	
-	handle @default {
-		tls {
-			issuer acme
-			protocols tls1.3
-		}
-		header {
-			X-Frame-Options "DENY"
-			X-Content-Type-Options "nosniff"
-			X-XSS-Protection "1; mode=block"
-			Referrer-Policy: no-referrer-when-downgrade
-			Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
-			Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-			-Server
-		}
-		redir * {$FATHOM_TARGET:https://usefathom.com/ref/EXAMPLE} permanent
-	}
-	
-	log {
-		output file /var/log/caddy/fathom-redirect.log
-	}
+	redir * https://devopsish.com/firehose{uri} permanent
 }
 
-# Meeting Scheduler Redirect
-meet.{$DOMAIN:example.com} {
-	@default {
-		not path /health
+walkingoxymoron.com www.walkingoxymoron.com cbshort.co www.cbshort.co thechrisshort.com www.thechrisshort.com advisedbyshort.com www.advisedbyshort.com {
+	tls {
+		issuer acme
+		protocols tls1.3
 	}
-	
-	handle /health {
-		respond `{"status":"healthy","service":"meet-redirect"}` 200 {
-			header Content-Type application/json
-		}
+	header {
+		X-Frame-Options "DENY"
+		X-Content-Type-Options "nosniff"
+		X-XSS-Protection "1; mode=block"
+		Referrer-Policy: no-referrer-when-downgrade
+		Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+		# Remove server header
+		-Server
 	}
-	
-	handle @default {
-		tls {
-			issuer acme
-			protocols tls1.3
-		}
-		header {
-			X-Frame-Options "DENY"
-			X-Content-Type-Options "nosniff"
-			X-XSS-Protection "1; mode=block"
-			Referrer-Policy: no-referrer-when-downgrade
-			Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
-			Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-			-Server
-		}
-		redir * {$MEET_TARGET:https://calendly.com/example} permanent
-	}
-	
-	log {
-		output file /var/log/caddy/meet-redirect.log
-	}
+	redir * https://chrisshort.net permanent
 }
 
-# Mastodon Redirect
-purple.{$DOMAIN:example.com} {
-	@default {
-		not path /health
-	}
-	
-	handle /health {
-		respond `{"status":"healthy","service":"purple-redirect"}` 200 {
-			header Content-Type application/json
-		}
-	}
-	
-	handle @default {
-		tls {
-			issuer acme
-			protocols tls1.3
-		}
-		header {
-			X-Frame-Options "DENY"
-			X-Content-Type-Options "nosniff"
-			X-XSS-Protection "1; mode=block"
-			Referrer-Policy: no-referrer-when-downgrade
-			Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
-			Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-			-Server
-		}
-		redir * {$PURPLE_TARGET:https://hachyderm.io/@example} permanent
-	}
-	
-	log {
-		output file /var/log/caddy/purple-redirect.log
-	}
-}
-
-# Resume Redirect
-resume.{$DOMAIN:example.com} {
-	@default {
-		not path /health
-	}
-	
-	handle /health {
-		respond `{"status":"healthy","service":"resume-redirect"}` 200 {
-			header Content-Type application/json
-		}
-	}
-	
-	handle @default {
-		tls {
-			issuer acme
-			protocols tls1.3
-		}
-		header {
-			X-Frame-Options "DENY"
-			X-Content-Type-Options "nosniff"
-			X-XSS-Protection "1; mode=block"
-			Referrer-Policy: no-referrer-when-downgrade
-			Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
-			Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-			-Server
-		}
-		redir * {$RESUME_TARGET:https://example.com/resume} permanent
-	}
-	
-	log {
-		output file /var/log/caddy/resume-redirect.log
-	}
-}
-
-# DevOps Newsletter Redirect (your original request!)
 devopsnewsletters.com www.devopsnewsletters.com devopsnewsletter.com www.devopsnewsletter.com {
-	@default {
-		not path /health
+	tls {
+		issuer acme
+		protocols tls1.3
 	}
-	
-	handle /health {
-		respond `{"status":"healthy","service":"devops-newsletter-redirect","target":"https://chrisshort.net/devops-news/"}` 200 {
-			header Content-Type application/json
-		}
+	header {
+		X-Frame-Options "DENY"
+		X-Content-Type-Options "nosniff"
+		X-XSS-Protection "1; mode=block"
+		Referrer-Policy: no-referrer-when-downgrade
+		Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+		# Remove server header
+		-Server
 	}
-	
-	handle @default {
-		tls {
-			issuer acme
-			protocols tls1.3
-		}
-		header {
-			X-Frame-Options "DENY"
-			X-Content-Type-Options "nosniff"
-			X-XSS-Protection "1; mode=block"
-			Referrer-Policy: no-referrer-when-downgrade
-			Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
-			Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-			-Server
-		}
-		redir * https://chrisshort.net/devops-news/{uri} permanent
-	}
-	
-	log {
-		output file /var/log/caddy/devops-newsletter-redirect.log
-	}
+	redir * https://chrisshort.net/devops-news/ permanent
 }
 
-# Multiple domain redirects to main site
-{$LEGACY_DOMAINS:walkingoxymoron.com} www.{$LEGACY_DOMAINS:walkingoxymoron.com} {
-	@default {
-		not path /health
+devopsreadme.com www.devopsreadme.com {
+	tls {
+		issuer acme
+		protocols tls1.3
 	}
-	
-	handle /health {
-		respond `{"status":"healthy","service":"legacy-domain-redirect"}` 200 {
-			header Content-Type application/json
-		}
+	header {
+		X-Frame-Options "DENY"
+		X-Content-Type-Options "nosniff"
+		X-XSS-Protection "1; mode=block"
+		Referrer-Policy: no-referrer-when-downgrade
+		Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+		# Remove server header
+		-Server
 	}
-	
-	handle @default {
-		tls {
-			issuer acme
-			protocols tls1.3
-		}
-		header {
-			X-Frame-Options "DENY"
-			X-Content-Type-Options "nosniff"
-			X-XSS-Protection "1; mode=block"
-			Referrer-Policy: no-referrer-when-downgrade
-			Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
-			Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-			-Server
-		}
-		redir * https://$DOMAIN{uri} permanent
+	redir * https://chrisshort.net/devops-readme/ permanent
+}
+
+kubenews.net www.kubenews.net {
+	tls {
+		issuer acme
+		protocols tls1.3
 	}
-	
-	log {
-		output file /var/log/caddy/legacy-domains.log
+	header {
+		X-Frame-Options "DENY"
+		X-Content-Type-Options "nosniff"
+		X-XSS-Protection "1; mode=block"
+		Referrer-Policy: no-referrer-when-downgrade
+		Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+		# Remove server header
+		-Server
 	}
+	redir * https://chrisshort.net/kubernetes-news/ permanent
+}
+
+kubereadme.com www.kubereadme.com {
+	tls {
+		issuer acme
+		protocols tls1.3
+	}
+	header {
+		X-Frame-Options "DENY"
+		X-Content-Type-Options "nosniff"
+		X-XSS-Protection "1; mode=block"
+		Referrer-Policy: no-referrer-when-downgrade
+		Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+		# Remove server header
+		-Server
+	}
+	redir * https://chrisshort.net/kubernetes-readme/ permanent
 }
 
 ##### Home Lab Reverse Proxies #####
 
-# Simple lab health endpoint (optional)
-lab.{$DOMAIN:example.com} {
-	@default {
-		not path /health
+#
+# Uptime Monitor Endpoint
+#
+lab.chrisshort.net casa.chrisshort.net {
+	respond OK 200
+	encode gzip zstd
+	tls {
+		issuer acme
+		protocols tls1.3
 	}
-	
-	handle /health {
-		respond `{"status":"healthy","service":"lab-endpoint"}` 200 {
-			header Content-Type application/json
-		}
+	header {
+		X-Frame-Options "DENY"
+		X-Content-Type-Options "nosniff"
+		X-XSS-Protection "1; mode=block"
+		Referrer-Policy: no-referrer-when-downgrade
+		Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+		# Remove server header
+		-Server
 	}
-	
-	handle @default {
-		respond "OK" 200
-		encode gzip zstd
-		tls {
-			issuer acme
-			protocols tls1.3
-		}
-		header {
-			X-Frame-Options "DENY"
-			X-Content-Type-Options "nosniff"
-			X-XSS-Protection "1; mode=block"
-			Referrer-Policy: no-referrer-when-downgrade
-			Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
-			Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-			-Server
-		}
-		log {
-			output file /var/log/caddy/lab-status.log
-		}
+	log {
+		output file /var/log/caddy/casa.chrisshort.net-access.log
 	}
 }
+#
+# Uptime Kuma
+#
+status.chrisshort.net {
+	tls {
+		issuer acme
+		protocols tls1.3
+	}
+	header {
+		X-Frame-Options "DENY"
+		X-Content-Type-Options "nosniff"
+		X-XSS-Protection "1; mode=block"
+		Referrer-Policy: no-referrer-when-downgrade
+		Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+		# Remove server header
+		-Server
+	}
+	redir * https://uptime.chrisshort.net/status/1 permanent
+}
 
-# Global health check endpoint
-:80/health {
-	respond `{
-		"status": "healthy",
-		"service": "homelab-caddy",
-		"timestamp": "{time.now.unix}",
-		"version": "1.0.0"
-	}` 200 {
-		header Content-Type application/json
-		header Cache-Control "no-cache, no-store, must-revalidate"
+uptime.chrisshort.net {
+	reverse_proxy 10.0.4.19:3001
+	encode gzip zstd
+	tls {
+		issuer acme
+		protocols tls1.3
+	}
+	header {
+		X-Frame-Options "DENY"
+		X-Content-Type-Options "nosniff"
+		X-XSS-Protection "1; mode=block"
+		Referrer-Policy: no-referrer-when-downgrade
+		Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+		# Remove server header
+		-Server
+	}
+	log {
+		output file /var/log/caddy/uptime.chrisshort.net-access.log
 	}
 }
