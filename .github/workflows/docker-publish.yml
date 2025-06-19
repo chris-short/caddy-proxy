@@ -59,7 +59,7 @@ jobs:
         with:
           registry: ghcr.io
           username: chris-short
-          password: ${{ secrets.TOKEN }}
+          password: ${{ secrets.GHCR_PAT }}
 
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
