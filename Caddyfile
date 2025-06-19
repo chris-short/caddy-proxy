@@ -1,0 +1,299 @@
+{
+	# Global options
+	email {$CADDY_EMAIL:admin@example.com}
+	admin off
+	log {
+		output stdout
+		format console
+	}
+}
+
+##### URL Redirection Section #####
+
+# Social Media Redirects
+blue.{$DOMAIN:example.com} {
+	@default {
+		not path /health
+	}
+	
+	# Health check endpoint
+	handle /health {
+		respond `{"status":"healthy","service":"blue-redirect","target":"{$BLUE_TARGET:https://bsky.app/profile/example.com}"}` 200 {
+			header Content-Type application/json
+		}
+	}
+	
+	handle @default {
+		tls {
+			issuer acme
+			protocols tls1.3
+		}
+		header {
+			X-Frame-Options "DENY"
+			X-Content-Type-Options "nosniff"
+			X-XSS-Protection "1; mode=block"
+			Referrer-Policy: no-referrer-when-downgrade
+			Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+			Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+			-Server
+		}
+		redir * {$BLUE_TARGET:https://bsky.app/profile/example.com} permanent
+	}
+	
+	log {
+		output file /var/log/caddy/blue-redirect.log
+	}
+}
+
+# Analytics Redirect
+fathom.{$DOMAIN:example.com} {
+	@default {
+		not path /health
+	}
+	
+	handle /health {
+		respond `{"status":"healthy","service":"fathom-redirect"}` 200 {
+			header Content-Type application/json
+		}
+	}
+	
+	handle @default {
+		tls {
+			issuer acme
+			protocols tls1.3
+		}
+		header {
+			X-Frame-Options "DENY"
+			X-Content-Type-Options "nosniff"
+			X-XSS-Protection "1; mode=block"
+			Referrer-Policy: no-referrer-when-downgrade
+			Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+			Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+			-Server
+		}
+		redir * {$FATHOM_TARGET:https://usefathom.com/ref/EXAMPLE} permanent
+	}
+	
+	log {
+		output file /var/log/caddy/fathom-redirect.log
+	}
+}
+
+# Meeting Scheduler Redirect
+meet.{$DOMAIN:example.com} {
+	@default {
+		not path /health
+	}
+	
+	handle /health {
+		respond `{"status":"healthy","service":"meet-redirect"}` 200 {
+			header Content-Type application/json
+		}
+	}
+	
+	handle @default {
+		tls {
+			issuer acme
+			protocols tls1.3
+		}
+		header {
+			X-Frame-Options "DENY"
+			X-Content-Type-Options "nosniff"
+			X-XSS-Protection "1; mode=block"
+			Referrer-Policy: no-referrer-when-downgrade
+			Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+			Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+			-Server
+		}
+		redir * {$MEET_TARGET:https://calendly.com/example} permanent
+	}
+	
+	log {
+		output file /var/log/caddy/meet-redirect.log
+	}
+}
+
+# Mastodon Redirect
+purple.{$DOMAIN:example.com} {
+	@default {
+		not path /health
+	}
+	
+	handle /health {
+		respond `{"status":"healthy","service":"purple-redirect"}` 200 {
+			header Content-Type application/json
+		}
+	}
+	
+	handle @default {
+		tls {
+			issuer acme
+			protocols tls1.3
+		}
+		header {
+			X-Frame-Options "DENY"
+			X-Content-Type-Options "nosniff"
+			X-XSS-Protection "1; mode=block"
+			Referrer-Policy: no-referrer-when-downgrade
+			Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+			Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+			-Server
+		}
+		redir * {$PURPLE_TARGET:https://hachyderm.io/@example} permanent
+	}
+	
+	log {
+		output file /var/log/caddy/purple-redirect.log
+	}
+}
+
+# Resume Redirect
+resume.{$DOMAIN:example.com} {
+	@default {
+		not path /health
+	}
+	
+	handle /health {
+		respond `{"status":"healthy","service":"resume-redirect"}` 200 {
+			header Content-Type application/json
+		}
+	}
+	
+	handle @default {
+		tls {
+			issuer acme
+			protocols tls1.3
+		}
+		header {
+			X-Frame-Options "DENY"
+			X-Content-Type-Options "nosniff"
+			X-XSS-Protection "1; mode=block"
+			Referrer-Policy: no-referrer-when-downgrade
+			Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+			Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+			-Server
+		}
+		redir * {$RESUME_TARGET:https://example.com/resume} permanent
+	}
+	
+	log {
+		output file /var/log/caddy/resume-redirect.log
+	}
+}
+
+# DevOps Newsletter Redirect (your original request!)
+devopsnewsletters.com www.devopsnewsletters.com devopsnewsletter.com www.devopsnewsletter.com {
+	@default {
+		not path /health
+	}
+	
+	handle /health {
+		respond `{"status":"healthy","service":"devops-newsletter-redirect","target":"https://chrisshort.net/devops-news/"}` 200 {
+			header Content-Type application/json
+		}
+	}
+	
+	handle @default {
+		tls {
+			issuer acme
+			protocols tls1.3
+		}
+		header {
+			X-Frame-Options "DENY"
+			X-Content-Type-Options "nosniff"
+			X-XSS-Protection "1; mode=block"
+			Referrer-Policy: no-referrer-when-downgrade
+			Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+			Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+			-Server
+		}
+		redir * https://chrisshort.net/devops-news/{uri} permanent
+	}
+	
+	log {
+		output file /var/log/caddy/devops-newsletter-redirect.log
+	}
+}
+
+# Multiple domain redirects to main site
+{$LEGACY_DOMAINS:walkingoxymoron.com} www.{$LEGACY_DOMAINS:walkingoxymoron.com} {
+	@default {
+		not path /health
+	}
+	
+	handle /health {
+		respond `{"status":"healthy","service":"legacy-domain-redirect"}` 200 {
+			header Content-Type application/json
+		}
+	}
+	
+	handle @default {
+		tls {
+			issuer acme
+			protocols tls1.3
+		}
+		header {
+			X-Frame-Options "DENY"
+			X-Content-Type-Options "nosniff"
+			X-XSS-Protection "1; mode=block"
+			Referrer-Policy: no-referrer-when-downgrade
+			Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+			Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+			-Server
+		}
+		redir * https://$DOMAIN{uri} permanent
+	}
+	
+	log {
+		output file /var/log/caddy/legacy-domains.log
+	}
+}
+
+##### Home Lab Reverse Proxies #####
+
+# Simple lab health endpoint (optional)
+lab.{$DOMAIN:example.com} {
+	@default {
+		not path /health
+	}
+	
+	handle /health {
+		respond `{"status":"healthy","service":"lab-endpoint"}` 200 {
+			header Content-Type application/json
+		}
+	}
+	
+	handle @default {
+		respond "OK" 200
+		encode gzip zstd
+		tls {
+			issuer acme
+			protocols tls1.3
+		}
+		header {
+			X-Frame-Options "DENY"
+			X-Content-Type-Options "nosniff"
+			X-XSS-Protection "1; mode=block"
+			Referrer-Policy: no-referrer-when-downgrade
+			Permissions-Policy = 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()'
+			Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+			-Server
+		}
+		log {
+			output file /var/log/caddy/lab-status.log
+		}
+	}
+}
+
+# Global health check endpoint
+:80/health {
+	respond `{
+		"status": "healthy",
+		"service": "homelab-caddy",
+		"timestamp": "{time.now.unix}",
+		"version": "1.0.0"
+	}` 200 {
+		header Content-Type application/json
+		header Cache-Control "no-cache, no-store, must-revalidate"
+	}
+}
