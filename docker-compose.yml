@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  caddy:
+    container_name: ghcr.io/chris-short/caddy-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./docker-entrypoint.sh:/docker-entrypoint.sh:ro
+      - caddy_data:/data
+      - caddy_config:/config
+      - caddy_logs:/var/log/caddy
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:
+  caddy_logs:
