@@ -10,7 +10,7 @@ StartLimitBurst=3
 Type=oneshot
 RemainAfterExit=true
 WorkingDirectory=/home/cbshort/repo/caddy-proxy
-Group=cbshort
+Group=root
 
 # Add debug logging
 Environment=PODMAN_LOG_LEVEL=debug
