@@ -17,6 +17,10 @@ RUN chmod +x /docker-entrypoint.sh
 
 RUN mkdir -p /data /config
 
+# Ensure caddy user/group exists
+
+RUN addgroup --system caddy && adduser --system --ingroup caddy caddy
+
 # Set proper ownership
 
 RUN chown -R caddy:caddy /data /config /var/log/caddy
