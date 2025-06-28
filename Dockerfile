@@ -10,10 +10,6 @@ RUN apk upgrade --no-cache && \
     apk add --no-cache ca-certificates tzdata && \
     rm -rf /var/cache/apk/*
 
-# Create necessary directories with proper permissions
-RUN mkdir -p /var/log/caddy /data /config && \
-    chown -R caddy:caddy /var/log/caddy /data /config
-
 # Copy configuration files with proper ownership
 COPY --chown=caddy:caddy Caddyfile /etc/caddy/Caddyfile
 COPY --chown=caddy:caddy docker-entrypoint.sh /docker-entrypoint.sh
