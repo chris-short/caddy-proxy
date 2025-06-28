@@ -1,0 +1,45 @@
+[Unit]
+Description=Caddy Proxy via Docker Compose
+Documentation=https://github.com/chris-short/caddy-proxy
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=300
+StartLimitBurst=3
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+User=cbshort
+Group=cbshort
+WorkingDirectory=/home/cbshort/repo/caddy-proxy
+
+# Security settings
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectHome=read-only
+ProtectSystem=strict
+ReadWritePaths=/home/cbshort/Container/caddy-proxy
+
+# Environment
+Environment=COMPOSE_PROJECT_NAME=caddy-proxy
+Environment=DOCKER_BUILDKIT=1
+
+# Pre-flight checks
+ExecStartPre=/bin/bash -c 'docker compose config --quiet'
+ExecStartPre=/bin/bash -c 'docker compose pull --quiet'
+
+# Main commands
+ExecStart=/bin/bash -c 'docker compose up --detach --remove-orphans'
+ExecReload=/bin/bash -c 'docker compose restart'
+ExecStop=/bin/bash -c 'docker compose down --timeout 30'
+
+# Cleanup on failure
+ExecStopPost=/bin/bash -c 'docker compose down --remove-orphans || true'
+
+# Timeouts
+TimeoutStartSec=300
+TimeoutStopSec=60
+
+[Install]
+WantedBy=multi-user.target
