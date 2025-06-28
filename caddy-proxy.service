@@ -9,7 +9,7 @@ StartLimitBurst=3
 [Service]
 Type=oneshot
 RemainAfterExit=true
-WorkingDirectory=/home/cbshort/Container/caddy-proxy
+WorkingDirectory=/home/cbshort/repo/caddy-proxy
 Group=root
 
 # Add debug logging
