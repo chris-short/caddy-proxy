@@ -11,14 +11,11 @@ RUN apk upgrade --no-cache && \
     rm -rf /var/cache/apk/*
 
 # Copy configuration files with proper ownership
-COPY --chown=caddy:caddy Caddyfile /etc/caddy/Caddyfile
-COPY --chown=caddy:caddy docker-entrypoint.sh /docker-entrypoint.sh
+COPY Caddyfile /etc/caddy/Caddyfile
+COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 # Make entrypoint executable
 RUN chmod +x /docker-entrypoint.sh
-
-# Security: Use non-root user from the start
-USER caddy
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
